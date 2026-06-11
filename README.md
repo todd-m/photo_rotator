@@ -15,18 +15,28 @@ Combines a directory of images into a single PDF with two images per page.
 ## Setup
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+make install          # creates .venv and installs requirements.txt
 ```
 
 ## Usage
 
 ```bash
-python photos_to_pdf.py /path/to/photos output.pdf
+make run IN=/path/to/photos OUT=output.pdf
+# or directly:
+.venv/bin/python photos_to_pdf.py /path/to/photos output.pdf
 ```
 
 Prints a summary on completion: number of images processed and output path.
+
+## Testing
+
+```bash
+make test             # pytest, 80% coverage gate (pyproject.toml)
+make ci               # tests + ruff lint + pip-audit
+```
+
+Tests build real JPEG/HEIC fixtures with PIL and inspect the generated PDFs
+with pypdf; the ReportLab canvas is mocked only for geometry assertions.
 
 ## Architecture
 

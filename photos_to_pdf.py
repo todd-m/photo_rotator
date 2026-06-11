@@ -5,11 +5,11 @@ from pathlib import Path
 
 import pillow_heif
 from PIL import Image, ImageOps
-
-pillow_heif.register_heif_opener()
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
+
+pillow_heif.register_heif_opener()
 
 # Page dimensions in points (72 pt/in); letter = 612 x 792 pt
 PAGE_W, PAGE_H = letter
@@ -81,8 +81,7 @@ def main():
         sys.exit(1)
 
     image_paths = sorted(
-        p for p in input_dir.iterdir()
-        if p.suffix.lower() in {".jpg", ".jpeg", ".heic"}
+        p for p in input_dir.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".heic"}
     )
 
     if not image_paths:
